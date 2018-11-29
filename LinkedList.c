@@ -7,6 +7,52 @@ struct Node
     struct Node* next;
 };
 
+void insert_front(struct Node** head_ref, int new_data)
+{
+    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+
+    new_node->data = new_data;
+    new_node->next = *head_ref;
+    *head_ref = new_node;
+}
+
+void insert_after(struct Node* prev_node, int new_data)
+{
+    if(prev_node == NULL)
+    {
+        printf("The given previos node does not exists!");
+        return;
+    }
+
+    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+
+    new_node->data = new_data;
+    new_node->next = prev_node->next;
+    prev_node->next = new_node;
+}
+
+void insert_end(struct Node** head_ref, int new_data)
+{
+    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+    struct Node* curr = (struct Node*)malloc(sizeof(struct Node));
+
+    new_node->data = new_data;
+    new_node->next = NULL;
+
+    if(*head_ref == NULL)
+    {
+        *head_ref = new_node;
+        return;
+    }
+
+    while(last->next != NULL)
+    {
+        curr = curr->next;
+    }
+
+    curr->next = new_node;
+}
+
 void printList(struct Node* n)
 {
     while(n != NULL)
