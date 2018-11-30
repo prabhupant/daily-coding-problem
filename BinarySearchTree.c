@@ -4,9 +4,9 @@
 struct Node
 {
     int data;
-    struct node* left;
-    struct node* right;
-}
+    struct Node* left;
+    struct Node* right;
+};
 
 struct Node* newNode(int data)
 {
@@ -23,7 +23,7 @@ struct Node* search(struct Node* root, int key)
     {
         return root;
     }
-    if(root->key < key)
+    if(root->data < key)
     {
         return search(root->right, key);
     }
@@ -37,11 +37,11 @@ struct Node* insert(struct Node* root, int key)
 {
     if(root == NULL)
         return newNode(key);
-    if(key < root->key)
+    if(key < root->data)
     {
         root->left = insert(root->left, key);
     }
-    else if(key > root->key)
+    else if(key > root->data)
     {
         root->right = insert(root->right, key);
     }
@@ -53,8 +53,23 @@ void inorder(struct Node* root)
     if(root != NULL)
     {
         inorder(root->left);
-        printf("%d\n", root->key);
+        printf("%d\n", root->data);
         inorder(root->right);
     }
+}
+
+int main()
+{
+    printf("Constructing the BST...");
+    struct Node* root = NULL;
+    root = insert(root, 5);
+    insert(root, 3);
+    insert(root, 7);
+    insert(root, 1);
+    insert(root, 4);
+    insert(root, 6);
+    insert(root, 8);
+    inorder(root);
+    return 0;
 }
 
