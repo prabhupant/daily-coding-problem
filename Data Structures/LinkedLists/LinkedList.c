@@ -127,6 +127,21 @@ void swapNodes(struct Node** head_ref, int x, int y)
     currX->next = temp;
 }
 
+void reverse(struct Node** head_ref)
+{
+    struct Node* prev = NULL;
+    struct Node* curr = *head_ref;
+    struct Node* next = NULL;
+    while(curr != NULL)
+    {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+    *head_ref = prev;
+}
+
 int main()
 {
     struct Node* head = NULL;
