@@ -98,7 +98,7 @@ void swapNodes(struct Node** head_ref, int x, int y)
     while(currY && currY->data != y)
     {
         prevY = currY;
-        currY = curY->next;
+        currY = currY->next;
     }
 
     if(currX == NULL || currY == NULL){
@@ -115,7 +115,7 @@ void swapNodes(struct Node** head_ref, int x, int y)
 
     if(prevY != NULL)
     {
-        preevY->next = currX;
+        prevY->next = currX;
     }
     else
     {
@@ -134,10 +134,10 @@ void reverse(struct Node** head_ref)
     struct Node* next = NULL;
     while(curr != NULL)
     {
-        next = current->next;
-        current->next = prev;
-        prev = current;
-        current = next;
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
     }
     *head_ref = prev;
 }
@@ -145,19 +145,12 @@ void reverse(struct Node** head_ref)
 int main()
 {
     struct Node* head = NULL;
-    struct Node* second = NULL;
-    struct Node* third = NULL;
-
-    head = (struct Node*)malloc(sizeof(struct Node));
-    second = (struct Node*)malloc(sizeof(struct Node));
-    third = (struct Node*)malloc(sizeof(struct Node));
-
-    head->data = 1;
-    head->next = second;
-    second->data = 2;
-    second->next = third;
-    third->data = 3;
-    third->next = NULL;
+    insertFront(&head, 1);
+    insertEnd(&head, 2);
+    insertEnd(&head, 3);
+    insertEnd(&head, 5);
+    insertAfter(head->next->next, 4);
+    printList(head);
 
     return 0;
 }
