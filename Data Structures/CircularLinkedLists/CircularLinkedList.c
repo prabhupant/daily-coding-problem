@@ -63,13 +63,43 @@ void insertAfter(struct Node** last, int data, int item)
 
 void insertEnd(struct Node **last, int data)
 {
-    if(last == NULL)
+    if(*last == NULL)
         return addToEmpty(&*last, data);
     struct Node* new_node = (struct Node*)malloc(sizeof(struct Node*));
     new_node->data = data;
     new_node->next = (*last)->next;
     (*last)->next = new_node;
     *last = new_node;
+}
+
+void deleteNode(struct Node **last_ref, int data)
+{
+    if(*last_ref == NULL)
+    {
+        printf("The list is empty!");
+        return;
+    }
+    struct Node *curr = (*last_ref)->next;
+    struct Node *prev;
+    while(curr != *last_ref && curr->data != data)
+    {
+        if(curr == (*last_ref) && curr->data != data)
+        {
+            printf("The required node is absent!");
+            return;
+        }
+        prev = curr;
+        curr = curr->next;
+    }
+    if(curr == *last_ref)
+    {
+        prev->next = (*last_ref)->next;
+        *last_ref = prev;
+        free(curr);
+        return;
+    }
+    prev->next = curr->next;
+    free(curr);
 }
 
 void printList(struct Node *last)
@@ -97,6 +127,15 @@ int main()
     insertEnd(&last, 4);
     insertEnd(&last, 6);
     insertAfter(&last, 5, 4);
+    printList(last);
+    printf("\nDeleting node 4 now...\nNew List - \n");
+    deleteNode(&last, 4);
+    printList(last);
+    printf("\nDeleting node 1 now...\nNew List - \n");
+    deleteNode(&last, 1);
+    printList(last);
+    printf("\nDeleting node 6 now...\nNew List - \n");
+    deleteNode(&last, 6);
     printList(last);
     return 0;
 }
