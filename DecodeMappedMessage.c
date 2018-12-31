@@ -7,7 +7,8 @@ int countDecoding(char* digits, int n)
     if(n == 0 || n == 1)
         return 1;
 
-    int count = 0;
+    int count;
+    count = 0;
 
     if(digits[n-1] > '0')
     {
