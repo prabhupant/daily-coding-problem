@@ -52,7 +52,7 @@ class DisjointSet:
 def get_key(edge):
     return edge.weight
 
-def minimum_spannin_tree(graph):
+def minimum_spanning_tree(graph):
     disjoint_set = DisjointSet()
     sorted_edges = sorted(graph.all_edges, key = get_key)
     print(sorted_edges)
